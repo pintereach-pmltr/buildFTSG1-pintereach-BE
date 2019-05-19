@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken'); // installed this library
-
-const secrets = require('../config/secrets.js');
+const secrets = require('./secrets');
 
 module.exports = {
   generateToken,
