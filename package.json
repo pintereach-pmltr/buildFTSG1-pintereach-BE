@@ -1,0 +1,35 @@
+{
+  "name": "buildftsg1-pintereach-be",
+  "version": "1.0.0",
+  "description": "BE for Pintereach",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch --verbose",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pintereach-pmltr/buildFTSG1-pintereach-BE.git"
+  },
+  "author": "erica-y-chen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pintereach-pmltr/buildFTSG1-pintereach-BE/issues"
+  },
+  "homepage": "https://github.com/pintereach-pmltr/buildFTSG1-pintereach-BE#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-session-knex": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.0",
+    "express-session": "^1.16.1",
+    "helmet": "^3.18.0",
+    "jest": "^24.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.16.5",
+    "nodemon": "^1.19.0",
+    "sqlite3": "^4.0.8",
+    "supertest": "^4.0.2"
+  }
+}
