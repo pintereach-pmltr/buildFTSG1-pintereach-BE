@@ -30,16 +30,17 @@ const insert = body => {
         .then(([id]) => findById(id));
 };
   
-// const remove = id => {
-//     return db('boards')
-//         .where({ id })
-//         .del();
-// }
+const remove = id => {
+    return db('articles')
+        .where({ id })
+        .del();
+}
 
 module.exports = {
     getAllArticles,
     getArticlesForUser,
     findById,
     insert,
+    remove
 }
 

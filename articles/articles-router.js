@@ -58,20 +58,20 @@ router.post('/', restricted, (req, res) => {
 //     }
 //   });
 
-// router.delete('/:id', restricted, (req, res) => {
-//     const id = req.params.id;
-//     db.remove(id)
-//         .then(board => {
-//             if(board) {
-//                 res.status(200).json({message: 'board was deleted'});
-//             } else {
-//                 res.status(404).json({ message: "board with that id doesn't exist"})
-//             }
-//         })
-//         .catch(err => {
-//             res.status(500).json(err);
-//         })
-// })
+router.delete('/:id', restricted, (req, res) => {
+    const id = req.params.id;
+    db.remove(id)
+        .then(article => {
+            if(article) {
+                res.status(200).json({message: 'article was deleted'});
+            } else {
+                res.status(404).json({ message: "article with that id doesn't exist"})
+            }
+        })
+        .catch(err => {
+            res.status(500).json(err);
+        })
+})
 
 
 module.exports = router; 

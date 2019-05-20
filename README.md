@@ -445,3 +445,50 @@ message: 'incomplete request, expecting a url and board_id'
 >If you are not logged in or your session has expired, the endpoint will return code `400` 
 
 
+_____
+## **DELETE BOARD**
+### Deletes board with specific id.
+
+*Method Url:* `https://pintereach0.herokuapp.com/api/articles/:id`
+
+*HTTP method:* **[DELETE]**
+
+#### Headers
+
+| name           | type   | required | description                    |
+| -------------- | ------ | -------- | ------------------------------ |
+| `Content-Type` | String | Yes      | Must be application/json       |
+| `Authorization`| String | Yes      | Bearer JWT authorization token |
+
+#### Parameters
+
+| name    | type   | required | description              |
+| --------| ------ | -------- | ------------------------ |
+| `id`| Int    | Yes      | Id of article you want deleted |
+
+
+#### Response
+##### 200 (OK)
+>If the request if successful, the server will return an HTTP response with a status code `200` and body as follows:
+
+```
+[
+  message: 'article was deleted'
+]
+  ```
+
+##### 404 (Not Found)
+>If the boardId passed in does not match one in the database, the endpoint will return an HTTP response with a status code `404` and a body as below.
+```
+{
+  message: "article with that id doesn't exist"
+}
+```
+
+##### 401 (Unauthorized)
+>If you are not logged in, the endpoint will return the status code `401` and a body as follows
+```
+{
+  error:'insufficient credentials, please login again'
+}
+```
