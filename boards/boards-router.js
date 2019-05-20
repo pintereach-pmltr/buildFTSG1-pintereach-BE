@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const express = require('express');
 const db = require('./boards-model.js');
+const restricted = require('../auth/restricted-middleware.js');
 
 //get users boards
-router.get('/:id', (req,res) => {
+router.get('/:id', restricted, (req,res) => {
     const id = req.params.id;
     db.getAllUserBoards(id)
         .then(boards => {
@@ -34,6 +35,20 @@ router.post('/', (req, res) => {
     }
   });
 
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    db.remove(id)
+        .then(board => {
+            if(board) {
+                res.status(200).json({message: 'board was deleted'});
+            } else {
+                res.status(404).json({ message: "board with that id doesn't exist"})
+            }
+        })
+        .catch(err => {
+            res.status(500).json(err);
+        })
+})
 
 
 module.exports = router; 
