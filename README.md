@@ -101,7 +101,7 @@ To test the repository:
   "message": "missing username and or password fields"
 }
 ```
-[Back to Table of Contents](#table-of-contents)
+
 ____
 
 ## **LOGIN**
@@ -158,3 +158,290 @@ ____
   "message": "The requested content does not exist."
 }
 ```
+
+----
+
+
+#BOARDS ROUTES
+
+## **GET ALL**
+## Returns all user boards 
+
+*Method URL* `https://pintereach0.herokuapp.com/api/boards/${id}`
+*HTTP method:* **[GET]**
+
+### Headers
+
+| name | type   | required | description |
+| ----- | ------ | -------- | ----- |
+| `Content-Type` | String | Yes | Must be application/json |
+| `Authorization`| String | Yes       | Bearer JWT authorization token |
+
+#### Parameters
+
+| name    | type   | required | description              |
+| --------| ------ | -------- | ------------------------ |
+| `id`| Int    | Yes      | Id of specific user |
+
+
+#### Response
+
+##### 200 (OK)
+>If you successfully return the boards for the user, the endpoint will return an HTTP response with a status code `200` and a body as below.
+
+*example* 
+
+```
+    {
+        "id": 1,
+        "board_title": "board1",
+        "user_id": 1
+    },
+    {
+        "id": 2,
+        "board_title": "board2",
+        "user_id": 1
+    }
+```
+
+#### 404 (User not found)
+>If the user you're trying to access doesn't exist, it'll return code '404' and a body as follows: 
+
+```
+"message": 'user with that id not found'}
+```
+
+
+#### 500 (Unauthorized)
+>If you are not logged in or your session has expired, the endpoint will return code `500` and a body as follows: 
+
+```
+"message": "insufficient credentials, please login again"
+```
+
+---
+## **ADD BOARD**
+## Add aboard for the user
+
+
+*Method URL* `https://pintereach0.herokuapp.com/api/boards/`
+*HTTP method:* **[POST]**
+
+### Headers
+
+| name | type   | required | description |
+| ----- | ------ | -------- | ----- |
+| `Content-Type` | String | Yes | Must be application/json |
+| `Authorization`| String | Yes       | Bearer JWT authorization token |
+
+#### Body 
+
+| name     | type   | required | description              |
+| ---------| ------ | -------- | ------------------------ |
+| `board_title`  | String | Yes       |  
+| `user_id`  | integer | Yes       | 
+
+*example:*
+```
+{
+  board_title: "Array Methods",
+  user_id: 1
+}
+```
+
+#### Response
+
+##### 201 (OK)
+>If you successfully createa board, the endpoint will return an HTTP response with a status code `201` and a body as below.
+
+*example* 
+
+```
+    {
+        "id": 1,
+        "board_title": "board1",
+        "user_id": 1
+    },
+```
+
+#### 500 (incomplete request)
+>If your request has insufficient information, the endpoint will return code `500` and a body as follows:
+
+```
+"message": 'incomplete request, expecting a user_id to associate the board with and a board_title'}
+```
+
+
+#### 400 (Unauthorized)
+>If you are not logged in or your session has expired, the endpoint will return code `400` 
+
+
+
+_____
+## **DELETE BOARD**
+### Deletes board with specific id.
+
+*Method Url:* `https://pintereach0.herokuapp.com/api/boards/:boardId`
+
+*HTTP method:* **[DELETE]**
+
+#### Headers
+
+| name           | type   | required | description                    |
+| -------------- | ------ | -------- | ------------------------------ |
+| `Content-Type` | String | Yes      | Must be application/json       |
+| `Authorization`| String | Yes      | Bearer JWT authorization token |
+
+#### Parameters
+
+| name    | type   | required | description              |
+| --------| ------ | -------- | ------------------------ |
+| `boardId`| Int    | Yes      | Id of specific quiz |
+
+
+#### Response
+##### 200 (OK)
+>If the request if successful, the server will return an HTTP response with a status code `200` and body as follows:
+
+```
+[
+  message: 'board was deleted'
+]
+  ```
+
+##### 404 (Not Found)
+>If the boardId passed in does not match one in the database, the endpoint will return an HTTP response with a status code `404` and a body as below.
+```
+{
+  message: "board with that id doesn't exist"
+}
+```
+
+##### 401 (Unauthorized)
+>If you are not logged in, the endpoint will return the status code `401` and a body as follows
+```
+{
+  error:'insufficient credentials, please login again'
+}
+```
+
+
+---
+
+
+#ARTICLES ROUTES
+
+## **GET ALL**
+## Returns all articles for a specific board
+
+*Method URL* `https://pintereach0.herokuapp.com/api/articles/${id}`
+*HTTP method:* **[GET]**
+
+### Headers
+
+| name | type   | required | description |
+| ----- | ------ | -------- | ----- |
+| `Content-Type` | String | Yes | Must be application/json |
+| `Authorization`| String | Yes       | Bearer JWT authorization token |
+
+#### Parameters
+
+| name    | type   | required | description              |
+| --------| ------ | -------- | ------------------------ |
+| `id`| Int    | Yes      | Id of specific board |
+
+
+#### Response
+
+##### 200 (OK)
+>If you successfully return the articles for the board, the endpoint will return an HTTP response with a status code `200` and a body as below.
+
+*example* 
+
+```
+    {
+        "id": 1,
+        "url": "url 1",
+        "article_label": "new article pinned 1",
+        "board_id": 1
+    },
+    {
+        "id": 3,
+        "url": "url 3",
+        "article_label": "new article pinned 3",
+        "board_id": 1
+    }
+```
+
+#### 404 (article not found)
+>If the article you're trying to access doesn't exist, it'll return code '404' and a body as follows: 
+
+```
+"message": 'article with that id not found'}
+```
+
+
+#### 500 (Unauthorized)
+>If you are not logged in or your session has expired, the endpoint will return code `500` and a body as follows: 
+
+```
+"message": "insufficient credentials, please login again"
+```
+
+---
+## **ADD ARTICLE**
+## Add article to a board
+
+
+*Method URL* `https://pintereach0.herokuapp.com/api/articles/`
+*HTTP method:* **[POST]**
+
+### Headers
+
+| name | type   | required | description |
+| ----- | ------ | -------- | ----- |
+| `Content-Type` | String | Yes | Must be application/json |
+| `Authorization`| String | Yes       | Bearer JWT authorization token |
+
+#### Body 
+
+| name     | type   | required | description              |
+| ---------| ------ | -------- | ------------------------ |
+| `article_label`  | String | Yes       |  
+| `board_id`  | integer | Yes       | 
+
+*example:*
+```
+{
+  article_label: "new article",
+  board_id: 1
+}
+```
+
+#### Response
+
+##### 201 (OK)
+>If you successfully create an article, the endpoint will return an HTTP response with a status code `201` and a body as below.
+
+*example* 
+
+```
+    {
+        "id": 1,
+        "article_label": "new article",
+        "board_id": 1
+    },
+```
+
+#### 500 (incomplete request)
+>If your request has insufficient information, the endpoint will return code `500` and a body as follows:
+
+```
+message: 'incomplete request, expecting a url and board_id'
+```
+
+
+#### 400 (Unauthorized)
+>If you are not logged in or your session has expired, the endpoint will return code `400` 
+
+

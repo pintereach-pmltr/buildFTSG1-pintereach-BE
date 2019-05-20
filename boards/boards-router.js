@@ -15,7 +15,7 @@ router.get('/:id', restricted, (req,res) => {
             }
         })
         .catch(err => {
-            res.status(500).json({error:'ran into an error retrieving the board'})
+            res.status(500).json({error:'insufficient credentials, please login again'})
         });
 });
 
@@ -30,7 +30,7 @@ router.post('/', restricted, (req, res) => {
                 res.status(201).json(board);
             })
             .catch(err => {
-                res.status(500).json(err);
+                res.status(400).json(err);
             })
     }
   });
@@ -46,7 +46,7 @@ router.delete('/:id', restricted, (req, res) => {
             }
         })
         .catch(err => {
-            res.status(500).json(err);
+            res.status(401).json({error:'insufficient credentials, please login again'})
         })
 })
 

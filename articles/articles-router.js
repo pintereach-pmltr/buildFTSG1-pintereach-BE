@@ -38,7 +38,7 @@ router.post('/', restricted, (req, res) => {
                 res.status(201).json(article);
             })
             .catch(err => {
-                res.status(500).json(err);
+                res.status(400).json(err);
             })
     }
   });
