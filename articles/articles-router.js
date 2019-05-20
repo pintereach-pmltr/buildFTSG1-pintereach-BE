@@ -12,8 +12,36 @@ router.get('/', restricted, (req,res) => {
         .catch(err => res.send(err));
 });
 
+router.get('/:id', restricted, (req,res) => {
+    const id = req.params.id;
+    db.getArticlesForUser(id)
+        .then(articles => {
+            if (articles) {
+            res.status(200).json(articles)
+            } else {
+                res.status(404).json({ message: 'board with that id not found'})
+            }
+        })
+        .catch(err => {
+            res.status(500).json({error:'ran into an error retrieving the articles'})
+        });
+});
 
 
+router.post('/', restricted, (req, res) => {
+    const {board_id, article_label, url} = req.body;
+    if (!board_id || !url ) {
+        res.status(500).json({ message: 'incomplete request, expecting a url and board_id' });
+    } else{
+        db.insert({ board_id, article_label, url})
+            .then(article => {
+                res.status(201).json({message: `article successfully added to board ${board_id}`});
+            })
+            .catch(err => {
+                res.status(500).json(err);
+            })
+    }
+  });
 // router.post('/', restricted, (req, res) => {
 //     const {user_id, title} = req.body;
 //     if (!user_id || !title ) {

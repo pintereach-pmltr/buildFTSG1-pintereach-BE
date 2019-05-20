@@ -21,11 +21,11 @@ router.get('/:id', restricted, (req,res) => {
 
 
 router.post('/', restricted, (req, res) => {
-    const {user_id, title} = req.body;
-    if (!user_id || !title ) {
-        res.status(400).json({ message: 'incomplete request' });
+    const {user_id, board_title} = req.body;
+    if (!user_id || !board_title ) {
+        res.status(500).json({ message: 'incomplete request, expecting a user_id to associate the board with and a board_title' });
     } else{
-        db.insert({ user_id, title})
+        db.insert({ user_id, board_title})
             .then(board => {
                 res.status(201).json(req.body);
             })

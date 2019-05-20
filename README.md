@@ -37,7 +37,7 @@ To test the repository:
 ```
 {
     "id": 1,                          // Integer [Primary Key]
-    "board-title": "science",         // String [Required]
+    "board_title": "science",         // String [Required]
     "user_id": 1,                     // Integer [Foreign Key]
 }
 ```
@@ -46,7 +46,7 @@ To test the repository:
 ```
 {
     "id": 1,                                      // Integer [Primary Key]
-    "article-label": "New Genome Discovered",     // String [Optional]
+    "article_label": "New Genome Discovered",     // String [Optional]
     "url": "https://www.sciencenews.org/article/peacock-spiders-superblack-spots-reflect-just-05-percent-light" //String [Required]
     "board_id": 1,                                 // Integer [Foreign Key]
 }

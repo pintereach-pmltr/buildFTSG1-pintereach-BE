@@ -18,7 +18,7 @@ exports.up = function(knex) {
       boards.increments();
 
       boards 
-        .string('title', 200)
+        .string('board_title', 200)
         .notNullable()
 
       boards
@@ -40,7 +40,7 @@ exports.up = function(knex) {
         .notNullable() 
 
       articles
-        .string('name', 200)
+        .string('article_label', 200)
       
       // articles 
       //   .boolean('is_saved')
@@ -56,8 +56,8 @@ exports.up = function(knex) {
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
       
-      articles
-        .specificType('categories', 'string ARRAY');
+      // articles
+      //   .specificType('categories', 'string ARRAY');
     })
 };
 

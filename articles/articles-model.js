@@ -4,27 +4,11 @@ const db = require('../database/dbConfig');
 const getAllArticles = async res => {
     return db('articles');
 };
-// function getAllUserBoards(id) {
-//     return db('boards').where({ user_id: id});
-// }
 
-// function findById(id) {
-//     return db('boards')
-//         .where({ id })
-//         .first();
-// }
+function getArticlesForUser(id){
+    return db('articles').where({ board_id: id })
+}
 
-// async function getArticles(id){
-//     const board = await db('boards')
-//         .where({id})
-//         .first();
-//     console.log(board)
-//     const articles = await db('articles as a')
-//         .select('a.name')
-//         .where('a.board_id', id)
-//     console.log('get', articles)
-//     return {board, articles: [...articles]};
-// }
 
 
 // // function add(board) {
@@ -34,11 +18,11 @@ const getAllArticles = async res => {
 // //       };
   
 
-// const insert = body => {
-//     return db('boards')
-//         .insert(body)
-//         .then(([id]) => getById(id));
-// };
+const insert = body => {
+    return db('articles')
+        .insert(body)
+        .then(([id]) => getById(id));
+};
   
 // const remove = id => {
 //     return db('boards')
@@ -48,5 +32,7 @@ const getAllArticles = async res => {
 
 module.exports = {
     getAllArticles,
+    getArticlesForUser,
+    insert,
 }
 

@@ -10,17 +10,17 @@ function findById(id) {
         .first();
 }
 
-async function getArticles(id){
-    const board = await db('boards')
-        .where({id})
-        .first();
-    console.log(board)
-    const articles = await db('articles as a')
-        .select('a.name')
-        .where('a.board_id', id)
-    console.log('get', articles)
-    return {board, articles: [...articles]};
-}
+// async function getArticles(id){
+//     const board = await db('boards')
+//         .where({id})
+//         .first();
+//     console.log(board)
+//     const articles = await db('articles as a')
+//         .select('a.article_label')
+//         .where('a.board_id', id)
+//     console.log('get', articles)
+//     return {board, articles: [...articles]};
+// }
 
 
 // function add(board) {
@@ -46,7 +46,6 @@ module.exports = {
     getAllUserBoards,
     findById,
     insert,
-    getArticles,
     remove
 }
 
