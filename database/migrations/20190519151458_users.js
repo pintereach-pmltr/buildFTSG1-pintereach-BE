@@ -40,15 +40,22 @@ exports.up = function(knex) {
       articles
         .string('name', 200)
       
-      articles 
-        .boolean('is_saved')
-        .notNullable()
-        .defaultTo(false)
+      // articles 
+      //   .boolean('is_saved')
+      //   .notNullable()
+      //   .defaultTo(false)
 
       articles 
         .integer('board_id')
         .unsigned()
-        .no
+        .notNullable()
+        .references('id')
+        .inTable('boards')
+        .onDelete('RESTRICT')
+        .onUpdate('CASCADE')
+      
+      articles
+        .specificType('categories', 'string ARRAY');
     })
 };
 
