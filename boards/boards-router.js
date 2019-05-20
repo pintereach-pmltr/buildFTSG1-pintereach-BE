@@ -20,7 +20,7 @@ router.get('/:id', restricted, (req,res) => {
 });
 
 
-router.post('/', (req, res) => {
+router.post('/', restricted, (req, res) => {
     const {user_id, title} = req.body;
     if (!user_id || !title ) {
         res.status(400).json({ message: 'incomplete request' });
@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
     }
   });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', restricted, (req, res) => {
     const id = req.params.id;
     db.remove(id)
         .then(board => {
