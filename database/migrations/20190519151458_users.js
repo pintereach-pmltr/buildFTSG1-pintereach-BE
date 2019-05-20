@@ -27,12 +27,14 @@ exports.up = function(knex) {
         .notNullable()
         .references('id')
         .inTable('users')
-        .onDelete('RESTRICT')
+        .onDelete('CASCADE')
         .onUpdate('CASCADE');
       })
 
     //articles
     .createTable('articles', articles => {
+      articles.increments(); 
+
       articles 
         .string('url', 600)
         .notNullable() 
@@ -51,7 +53,7 @@ exports.up = function(knex) {
         .notNullable()
         .references('id')
         .inTable('boards')
-        .onDelete('RESTRICT')
+        .onDelete('CASCADE')
         .onUpdate('CASCADE')
       
       articles
