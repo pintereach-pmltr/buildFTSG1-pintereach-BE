@@ -9,6 +9,12 @@ function getArticlesForUser(id){
     return db('articles').where({ board_id: id })
 }
 
+const findById = id => {
+    return db('articles')
+        .where({ id })
+        .first();
+}
+
 
 
 // // function add(board) {
@@ -21,7 +27,7 @@ function getArticlesForUser(id){
 const insert = body => {
     return db('articles')
         .insert(body)
-        .then(([id]) => getById(id));
+        .then(([id]) => findById(id));
 };
   
 // const remove = id => {
@@ -33,6 +39,7 @@ const insert = body => {
 module.exports = {
     getAllArticles,
     getArticlesForUser,
+    findById,
     insert,
 }
 

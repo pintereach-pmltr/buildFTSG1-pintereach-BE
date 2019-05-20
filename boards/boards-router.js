@@ -27,7 +27,7 @@ router.post('/', restricted, (req, res) => {
     } else{
         db.insert({ user_id, board_title})
             .then(board => {
-                res.status(201).json(req.body);
+                res.status(201).json(board);
             })
             .catch(err => {
                 res.status(500).json(err);

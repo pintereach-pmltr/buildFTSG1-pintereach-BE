@@ -1,10 +1,11 @@
 const db = require('../database/dbConfig');
 
-function getAllUserBoards(id) {
-    return db('boards').where({ user_id: id});
+const getAllUserBoards = id => {
+    return db('boards')
+    .where({ user_id: id});
 }
 
-function findById(id) {
+const findById = id => {
     return db('boards')
         .where({ id })
         .first();
@@ -33,7 +34,7 @@ function findById(id) {
 const insert = body => {
     return db('boards')
         .insert(body)
-        .then(([id]) => getById(id));
+        .then(([id]) => findById(id));
 };
   
 const remove = id => {

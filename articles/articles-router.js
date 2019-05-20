@@ -35,13 +35,14 @@ router.post('/', restricted, (req, res) => {
     } else{
         db.insert({ board_id, article_label, url})
             .then(article => {
-                res.status(201).json({message: `article successfully added to board ${board_id}`});
+                res.status(201).json(article);
             })
             .catch(err => {
                 res.status(500).json(err);
             })
     }
   });
+
 // router.post('/', restricted, (req, res) => {
 //     const {user_id, title} = req.body;
 //     if (!user_id || !title ) {
