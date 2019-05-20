@@ -8,13 +8,13 @@ module.exports = (req, res, next) => {
   if (token) {
     jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
       if (err) {
-        res.status(401).json({ you: "can't touch this!" });
+        res.status(401).json({ message: 'unauthorized request' });
       } else {
         req.decodedJwt = decodedToken;
         next();
       }
     });
   } else {
-    res.status(401).json({ message: 'unauthorized request, please login' });
+    res.status(401).json({ message: 'insufficient credentials, please login again' });
   }
 };
