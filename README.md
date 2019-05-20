@@ -51,3 +51,110 @@ To test the repository:
     "board_id": 1,                                 // Integer [Foreign Key]
 }
 ```
+
+# AUTH ROUTES
+
+## **REGISTER**
+### **Registers a user**
+
+*Method Url:* `https://pintereach0.herokuapp.com/api/auth/register`
+
+
+*HTTP method:* **[POST]**
+
+#### Headers
+
+| name           | type   | required | description              |
+| -------------- | ------ | -------- | ------------------------ |
+| `Content-Type` | String | Yes      | Must be application/json |
+
+#### Body
+
+| name           | type   | required | description              |
+| -------------- | ------ | -------- | ------------------------ |
+| `username`     | String | Yes      | Must be unique           |
+| `email`        | String | Yes      | Must be unique           |
+| `password`     | String | Yes      |                          |
+
+*example:*
+
+```
+{
+  username: "admin",
+  password: "password",
+}
+```
+
+#### Response
+
+##### 200 (OK)
+>If you successfully register a user the endpoint will return an HTTP response with a status code `200` and a body as below.
+```
+{ 
+  "message": "you have successfully registered, admin!"
+}
+```
+##### 400 (Bad Request)
+>If you send in invalid/incomplete, the endpoint will return an HTTP response with a status code `400` and a body as below.
+```
+{
+  "message": "missing username and or password fields"
+}
+```
+[Back to Table of Contents](#table-of-contents)
+____
+
+## **LOGIN**
+### **Logs a user in**
+
+*Method Url:* `https://pintereach0.herokuapp.com/api/auth/login`
+
+*HTTP method:* **[POST]**
+
+#### Headers
+
+| name           | type   | required | description              |
+| -------------- | ------ | -------- | ------------------------ |
+| `Content-Type` | String | Yes      | Must be application/json |
+
+#### Body
+
+| name           | type   | required | description              |
+| -------------- | ------ | -------- | ------------------------ |
+| `username`     | String | Yes      | Must match a username in the database |
+| `password`     | String | Yes      | Must match a password in the database corresponding username |
+
+*example:*
+
+```
+{
+  username: "admin",
+  password: "password"
+}
+```
+
+#### Response
+
+##### 200 (OK)
+>If you successfully login, the endpoint will return an HTTP response with a status code `200` and a body as below.
+```
+{
+  "message": "Welcome admin!, have a token...",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZXMiOlsiU3R1ZGVudCJdLCJpYXQiOjE1NTgzNzQ2NjAsImV4cCI6MTU1ODQ2MTA2MH0.8wOUVO-qmeCVF03fDyGxi7Us2jboWw5r99e7at-Lfnk"
+}
+```
+##### 400 (Bad Request)
+>If you send in invalid fields or the passwords do not match, the endpoint will return an HTTP response with a status code `400` and a body as below.
+```
+{
+  "message": "'Invalid Credentials'"
+}
+```
+##### 404 (Not Found)
+>If you send in an email address that does not match one in the database, the endpoint will return an HTTP response with a status code `404` and a body as below.
+```
+{
+  "error": true,
+  "message": "The requested content does not exist."
+}
+```
