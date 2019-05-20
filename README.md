@@ -16,6 +16,12 @@ To test the repository:
 
 ```yarn test```
 
+#Test Accounts
+
+```username: admin ```
+```password: password ```
+
+
 #SCHEMA
 
 users
