@@ -4,9 +4,9 @@ const server = require('../api/server');
 const db = require('../database/dbConfig');
 
 
-afterAll(() => {
-    return db('users').truncate();
-  });
+// afterAll(() => {
+//     return db('users').truncate();
+//   });
 
 
 describe('authorization', () => {

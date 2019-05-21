@@ -221,7 +221,7 @@ ____
 
 ---
 ## **ADD BOARD**
-## Add aboard for the user
+## Add a board for the user
 
 
 *Method URL* `https://pintereach0.herokuapp.com/api/boards/`
