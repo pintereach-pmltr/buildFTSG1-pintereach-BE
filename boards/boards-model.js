@@ -13,10 +13,9 @@ const findById = id => {
   
 
 const insert = body => {
-    db('boards')
-        .insert(body)
     return db('boards')
-        .where({ user_id: body.user_id });
+        .insert(body)
+        .then(([id]) => findById(id));
 };
   
 const remove = id => {
