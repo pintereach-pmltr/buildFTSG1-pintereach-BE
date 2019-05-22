@@ -37,36 +37,44 @@ afterAll(() => {
         })
     })
 
-    // describe('POST /login', () => {
-    //     it('should login with status 200', () => {
-    //         const newUser = {
-    //             username: "test",
-    //             password: "password"
-    //         }
+    describe('POST api/auth/login', () => {
 
-    //         return request(Server)
-    //         .post('api/auth/login')
-    //         .send(newUser)
-    //         .then(res => {
-    //             expect(200)
-    //         });
+        beforeEach(() => {
+            return request(Server)
+            .post('/api/auth/register')
+            .send({
+                username: "username",
+                password: "password"
+            });
+        });
 
-    //     })
-    // })
+        it('should login with status 200', () => {
+            return request(Server)
+            .post('/api/auth/login')
+            .send({
+                username: "username",
+                password: "password"
+            })
+            .then(res => {
+                expect(res.status).toBe(200)
+            });
+        })
 
-    //     it('should login with status 400', () => {
-    //         const newUser = {
-    //             username: "admin",
-    //             password: "password"
-    //         }
+        it('should login with status 400', () => {
+            const newUser = {
+                username: "admin",
+                password: "password"
+            }
 
-    //         return request(Server)
-    //         .post('/login')
-    //         .send(newUser)
-    //         .then(res => {
-    //             expect(400)
-    //         });
+            return request(Server)
+            .post('/api/auth/login')
+            .send(newUser)
+            .then(res => {
+                expect(400)
+            });
+        })
 
-    //     })
+    })
+
 
 
