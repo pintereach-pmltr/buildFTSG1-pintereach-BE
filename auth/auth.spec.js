@@ -1,6 +1,6 @@
 
 const request = require('supertest');
-const server = require('../api/server');
+const Server = require('../api/server');
 const db = require('../database/dbConfig');
 
 
@@ -10,21 +10,31 @@ const db = require('../database/dbConfig');
 
 
 describe('authorization', () => {
-    describe('POST /register', () => {
-        it('should register with status 201', () => {
-            const newUser = {
-                username: "test",
-                password: "password"
-            }
 
-            return request(server)
-            .post('api/auth/register')
-            .send(newUser)
-            .then(res => {
-                expect(201)
-            });
+    it('should register with status 201', () => {
+        return request(Server)
+          .post('/api/auth/register')
+          .send({
+            username: 'administration',
+            password: 'password',
+          })
+          .then(res => {
+            expect(res.status).toBe(201);
+          });
+      });
+    // describe('POST /register', () => {
+    //     it('should register with status 201', done => {
+    //         const newUser = {
+    //             username: "test",
+    //             password: "password"
+    //         }
 
-        })
+    //         axios.post('/register', newUser).then(res => {
+    //             expect(res.success).toBe(true);
+    //             done();
+    //         })
+    //     });
+
 
         it('should register with status 422', () => {
             const newUser = {
@@ -32,46 +42,45 @@ describe('authorization', () => {
                 password: "password"
             }
 
-            return request(server)
-            .post('/register')
+            return request(Server)
+            .post('/api/auth/register')
             .send(newUser)
             .then(res => {
-                expect(422)
+                expect(res.status).toBe(422)
             });
         })
     })
 
-    describe('POST /login', () => {
-        it('should login with status 200', () => {
-            const newUser = {
-                username: "test",
-                password: "password"
-            }
+    // describe('POST /login', () => {
+    //     it('should login with status 200', () => {
+    //         const newUser = {
+    //             username: "test",
+    //             password: "password"
+    //         }
 
-            return request(server)
-            .post('/login')
-            .send(newUser)
-            .then(res => {
-                expect(200)
-            });
+    //         return request(Server)
+    //         .post('/login')
+    //         .send(newUser)
+    //         .then(res => {
+    //             expect(404)
+    //         });
 
-        })
+    //     })
 
-        it('should login with status 400', () => {
-            const newUser = {
-                username: "admin",
-                password: "password"
-            }
+    //     it('should login with status 400', () => {
+    //         const newUser = {
+    //             username: "admin",
+    //             password: "password"
+    //         }
 
-            return request(server)
-            .post('/login')
-            .send(newUser)
-            .then(res => {
-                expect(400)
-            });
+    //         return request(Server)
+    //         .post('/login')
+    //         .send(newUser)
+    //         .then(res => {
+    //             expect(400)
+    //         });
 
-        })
-    })
-})
+    //     })
+    // })
 
 
