@@ -25,7 +25,10 @@ router.post('/', restricted, (req, res) => {
     if (!user_id || !board_title ) {
         res.status(500).json({ message: 'incomplete request, expecting a user_id to associate the board with and a board_title' });
     } else{
-        let board = req.body; 
+        let board = {
+            user_id: user_id,
+            board_title: board_title
+        }
         db.insert(board)
             .then(board => {
                 res.status(201).json(board);
