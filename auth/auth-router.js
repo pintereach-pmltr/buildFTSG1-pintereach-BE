@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 
-const tokenService = require('../auth/token-service.js');
+const tokenService = require('./token-service.js');
 const Users = require('../users/users-model.js');
 
 router.post('/register', (req, res) => {
@@ -34,7 +34,7 @@ router.post('/login', (req, res) => {
         res.status(200).json({
           message: `Welcome ${user.username}!, have a token...`,
           token,
-          roles: token.roles,
+          id: user.id, 
         });
       } else {
         res.status(400).json({ message: 'Invalid Credentials' });

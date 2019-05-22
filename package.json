@@ -4,7 +4,8 @@
   "description": "BE for Pintereach",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch --verbose",
+    "test": "cross-env DB_ENV=testing jest --watchAll --verbose",
+    "server": "nodemon index.js",
     "start": "node index.js"
   },
   "repository": {
@@ -21,6 +22,7 @@
     "bcryptjs": "^2.4.3",
     "connect-session-knex": "^1.4.0",
     "cors": "^2.8.5",
+    "cross-env": "^5.2.0",
     "dotenv": "^8.0.0",
     "express": "^4.17.0",
     "express-session": "^1.16.1",
@@ -29,6 +31,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.16.5",
     "nodemon": "^1.19.0",
+    "pg": "^7.11.0",
     "sqlite3": "^4.0.8",
     "supertest": "^4.0.2"
   }
