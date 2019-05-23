@@ -19,7 +19,7 @@ router.get('/:id', restricted, (req,res) => {
         });
 });
 
-router.get('/:id/all', (req,res) => {
+router.get('/:id/all', restricted, (req,res) => {
     const id = req.params.id;
     db.getBoardsAndArticles(id)
         .then(boards => {
