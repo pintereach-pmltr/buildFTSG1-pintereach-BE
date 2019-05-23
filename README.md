@@ -493,8 +493,8 @@ _____
 
 | name     | type   | required | description              |
 | ---------| ------ | -------- | ------------------------ |
-| `article_label`  | String | Yes       |  
-| `board_id`  | integer | Yes       | 
+| `article_label`   | String   | Yes       |  
+| `board_id`        | integer  | Yes       | 
 
 *example:*
 ```

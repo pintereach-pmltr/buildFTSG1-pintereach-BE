@@ -10,6 +10,12 @@ const findById = id => {
         .where({ id })
         .first();
 }
+
+const update = (id, edits) => {
+    return db('boards')
+    .where({id})
+    .update(edits)
+}
   
 async function getBoardsAndArticles(id){
     const boards = await db('boards as b')
@@ -54,6 +60,7 @@ const remove = id => {
 module.exports = {
     getAllUserBoards,
     findById,
+    update,
     insert,
     remove,
     getBoardsAndArticles

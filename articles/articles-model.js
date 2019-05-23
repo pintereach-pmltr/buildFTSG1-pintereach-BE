@@ -5,6 +5,12 @@ const getAllArticles = async res => {
     return db('articles');
 };
 
+const update = (id, edits) => {
+    return db('articles')
+    .where({id})
+    .update(edits)
+}
+
 function getArticlesForUser(id){
     return db('articles').where({ board_id: id })
 }
@@ -40,6 +46,7 @@ module.exports = {
     getAllArticles,
     getArticlesForUser,
     findById,
+    update,
     insert,
     remove
 }
