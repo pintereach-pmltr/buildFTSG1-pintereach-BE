@@ -16,25 +16,26 @@ async function getBoardsAndArticles(id){
         .where({user_id: id })
 
     const articles = await db('articles as a')
-        .join('boards as b', 'b.id', '=', 'a.board_id')    
-        .where({user_id: id})
-        .select('a.article_label', 'a.url', 'a.id')
-        .where('a.board_id', id)
-
+        // .join('boards as b', 'b.id', '=', 'a.board_id')    
+        // .where({user_id: id})
+        // .select('a.article_label', 'a.url', 'a.id')
+        // .where('a.board_id', id)
     boards.forEach(function(board){
-        console.log(board.board_id);
+        console.log(`here are the board ids`, board.id);
         articles.forEach(function(article){
-            if(article.board_id = board.id){
+            console.log(`article board id:`, article.board_id)
+            if(article.board_id == board.id){
+                console.log('looking at this article: ', article)
                 if (board.articles){
                     board.articles.push(article)
-                } else {
-                    board.articles = article; 
+                } else{
+                    board.articles = [article]; 
                 }
+                console.log(`state of boards.articles `, board.articles)
             }
         })
-
     })
-    console.log(boards)
+    console.log(`here are the boards`, boards)
     return{boards};
 }
 

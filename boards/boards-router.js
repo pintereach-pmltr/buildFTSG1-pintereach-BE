@@ -19,7 +19,7 @@ router.get('/:id', restricted, (req,res) => {
         });
 });
 
-router.get('/:id/all', restricted, (req,res) => {
+router.get('/:id/all', (req,res) => {
     const id = req.params.id;
     db.getBoardsAndArticles(id)
         .then(boards => {
@@ -30,7 +30,7 @@ router.get('/:id/all', restricted, (req,res) => {
             }
         })
         .catch(err => {
-            res.status(500).json({error:'insufficient credentials, please login again'})
+            res.status(500).json(err)
         });
 });
 
