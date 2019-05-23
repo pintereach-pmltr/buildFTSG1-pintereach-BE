@@ -27,6 +27,25 @@ router.get('/:id', restricted, (req,res) => {
         });
 });
 
+router.put('/:id', restricted, (req, res) => {
+    const id = req.params.id;
+    const { article_label, url } = req.body;
+    if (!url) {
+      res.status(500).json({ message: 'Missing fields required' });
+    } else {
+      db.update(id, { article_label, url })
+        .then(article => {
+          if (article) {
+            res.status(200).json(article);
+          } else {
+            res.status(404).json({ message: 'ID not found' });
+          }
+        })
+        .catch(err => {
+          res.status(500).json(err);
+        });
+    }
+  });
 
 router.post('/', restricted, (req, res) => {
     const {board_id, article_label, url} = req.body;

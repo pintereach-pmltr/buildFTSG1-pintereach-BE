@@ -19,7 +19,28 @@ router.get('/:id', restricted, (req,res) => {
         });
 });
 
-router.get('/:id/all', (req,res) => {
+
+router.put('/:id', restricted, (req, res) => {
+  const id = req.params.id;
+  const { board_title } = req.body;
+  if (!board_title) {
+    res.status(500).json({ message: 'Missing fields required' });
+  } else {
+    db.update(id, { board_title })
+      .then(board => {
+        if (board) {
+          res.status(200).json(board);
+        } else {
+          res.status(404).json({ message: 'ID not found' });
+        }
+      })
+      .catch(err => {
+        res.status(500).json(err);
+      });
+  }
+});
+
+router.get('/:id/all', restricted, (req,res) => {
     const id = req.params.id;
     db.getBoardsAndArticles(id)
         .then(boards => {

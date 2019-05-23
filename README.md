@@ -325,7 +325,93 @@ _____
 }
 ```
 
+---
+## *GET BOARDS AND ARTICLES* 
+## Recieve an array of board objects, each with an array of articles associated with that board_id 
 
+*Method URL* `https://pintereach0.herokuapp.com/api/boards/${id}/all`
+*HTTP method:* **[GET]**
+
+### Headers
+
+| name | type   | required | description |
+| ----- | ------ | -------- | ----- |
+| `Content-Type` | String | Yes | Must be application/json |
+| `Authorization`| String | Yes       | Bearer JWT authorization token |
+
+#### Parameters
+
+| name    | type   | required | description              |
+| --------| ------ | -------- | ------------------------ |
+| `id`| Int    | Yes      | Id of specific user |
+
+
+#### Response
+
+##### 200 (OK)
+>If you successfully return the boards for the user, the endpoint will return an HTTP response with a status code `200` and a body as below.
+
+*example* 
+
+```
+{
+    "boards": [
+        {
+            "id": 1,
+            "board_title": "admin",
+            "user_id": 1,
+            "articles": [
+                {
+                    "id": 1,
+                    "url": "asdlkfj",
+                    "article_label": "test article",
+                    "board_id": 1
+                },
+                {
+                    "id": 3,
+                    "url": "password",
+                    "article_label": "test3",
+                    "board_id": 1
+                },
+                {
+                    "id": 4,
+                    "url": "password",
+                    "article_label": "test4",
+                    "board_id": 1
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "board_title": "test 2",
+            "user_id": 1,
+            "articles": [
+                {
+                    "id": 2,
+                    "url": "url",
+                    "article_label": "test 2",
+                    "board_id": 2
+                }
+            ]
+        }
+    ]
+}
+```
+
+#### 404 (User not found)
+>If the user you're trying to access doesn't exist, it'll return code '404' and a body as follows: 
+
+```
+"message": 'user with that id not found'}
+```
+
+
+#### 500 (Unauthorized)
+>If you are not logged in or your session has expired, the endpoint will return code `500` and a body as follows: 
+
+```
+"message": "insufficient credentials, please login again"
+```
 ---
 
 
@@ -407,8 +493,8 @@ _____
 
 | name     | type   | required | description              |
 | ---------| ------ | -------- | ------------------------ |
-| `article_label`  | String | Yes       |  
-| `board_id`  | integer | Yes       | 
+| `article_label`   | String   | Yes       |  
+| `board_id`        | integer  | Yes       | 
 
 *example:*
 ```
