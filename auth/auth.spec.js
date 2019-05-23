@@ -4,9 +4,22 @@ const Server = require('../api/server');
 const db = require('../database/dbConfig');
 
 
-afterAll(() => {
-    return db('users').truncate();
-  });
+  describe('adding a new article', () => {
+
+    it('will not allow unauthenticated request', () => {
+        const newArticle = {
+            article_label: "new article",
+            url: "url",
+            board_id: 1
+        }
+        return request(Server)
+        .post('/api/articles')
+        .send({newArticle})
+        .then(res => {
+            expect(res.status).toBe(401)
+        })
+    })
+})
 
 
     describe('authorization', () => {
