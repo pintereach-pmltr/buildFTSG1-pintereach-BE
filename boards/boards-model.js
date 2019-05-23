@@ -27,21 +27,21 @@ async function getBoardsAndArticles(id){
         // .select('a.article_label', 'a.url', 'a.id')
         // .where('a.board_id', id)
     boards.forEach(function(board){
-        console.log(`here are the board ids`, board.id);
+        // console.log(`here are the board ids`, board.id);
         articles.forEach(function(article){
-            console.log(`article board id:`, article.board_id)
+            // console.log(`article board id:`, article.board_id)
             if(article.board_id == board.id){
-                console.log('looking at this article: ', article)
+                // console.log('looking at this article: ', article)
                 if (board.articles){
                     board.articles.push(article)
                 } else{
                     board.articles = [article]; 
                 }
-                console.log(`state of boards.articles `, board.articles)
+                // console.log(`state of boards.articles `, board.articles)
             }
         })
     })
-    console.log(`here are the boards`, boards)
+    // console.log(`here are the boards`, boards)
     return{boards};
 }
 
