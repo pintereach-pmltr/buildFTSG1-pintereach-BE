@@ -14,15 +14,28 @@ const findById = id => {
 async function getBoardsAndArticles(id){
     const boards = await db('boards as b')
         .where({user_id: id })
-        .first();
-    console.log(boards)
+
     const articles = await db('articles as a')
         .join('boards as b', 'b.id', '=', 'a.board_id')    
-        .select('a.article_label', 'a.url')
-        // .where('a.board_id', id)
+        .where({user_id: id})
+        .select('a.article_label', 'a.url', 'a.id')
+        .where('a.board_id', id)
 
-    console.log(articles)
-    return{boards, articles: [...articles]};
+    boards.forEach(function(board){
+        console.log(board.board_id);
+        articles.forEach(function(article){
+            if(article.board_id = board.id){
+                if (board.articles){
+                    board.articles.push(article)
+                } else {
+                    board.articles = article; 
+                }
+            }
+        })
+
+    })
+    console.log(boards)
+    return{boards};
 }
 
 const insert = body => {
