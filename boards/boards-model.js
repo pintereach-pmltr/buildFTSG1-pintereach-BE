@@ -11,6 +11,19 @@ const findById = id => {
         .first();
 }
   
+async function getBoardsAndArticles(id){
+    const boards = await db('boards as b')
+        .where({user_id: id })
+        .first();
+    console.log(boards)
+    const articles = await db('articles as a')
+        .join('boards as b', 'b.id', '=', 'a.board_id')    
+        .select('a.article_label', 'a.url')
+        // .where('a.board_id', id)
+
+    console.log(articles)
+    return{boards, articles: [...articles]};
+}
 
 const insert = body => {
     return db('boards')
@@ -28,6 +41,7 @@ module.exports = {
     getAllUserBoards,
     findById,
     insert,
-    remove
+    remove,
+    getBoardsAndArticles
 }
 

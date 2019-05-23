@@ -19,6 +19,22 @@ router.get('/:id', restricted, (req,res) => {
         });
 });
 
+router.get('/:id/all', restricted, (req,res) => {
+    const id = req.params.id;
+    db.getBoardsAndArticles(id)
+        .then(boards => {
+            if (boards) {
+            res.status(200).json(boards)
+            } else {
+                res.status(404).json({ message: 'user with that id not found'})
+            }
+        })
+        .catch(err => {
+            res.status(500).json({error:'insufficient credentials, please login again'})
+        });
+});
+
+
 
 router.post('/', restricted, (req, res) => {
     const {user_id, board_title} = req.body;
