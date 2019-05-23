@@ -11,6 +11,12 @@ exports.up = function(knex) {
         .notNullable()
         .unique();
       users.string('password', 128).notNullable();
+
+      users.string('first_name', 128)
+      
+      users.string('last_name', 128)
+
+      users.string('email', 130) 
     })
 
     //boards 
