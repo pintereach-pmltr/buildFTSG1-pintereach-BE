@@ -4,9 +4,9 @@ const helmet = require('helmet');
 
 const configureMiddleware = require('./middleware.js');
 const authRouter = require('../auth/auth-router.js');
-const usersRouter = require('../users/users-router.js');
-const boardsRouter = require('../boards/boards-router.js');
-const articlesRouter = require('../articles/articles-router.js');
+const usersRouter = require('../users/users-router.js.js.js');
+const boardsRouter = require('../boards/boards-router.js.js.js');
+const articlesRouter = require('../articles/articles-router.js.js.js');
 
 const server = express();
 
